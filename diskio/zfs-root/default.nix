@@ -11,7 +11,7 @@
               priority = 1;
               name = "ESP";
               start = "1M";
-              end = "128M";
+              end = "550M";
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -29,7 +29,13 @@
                 subvolumes = {
                   # Subvolume name is different from mountpoint
                   "/rootfs" = {
+                    mountOptions = [ "compress=zstd" ];
                     mountpoint = "/";
+                  };
+                  # Subvolume name is the same as the mountpoint
+                  "/boot" = {
+                    mountOptions = [ "compress=zstd" ];
+                    mountpoint = "/boot";
                   };
                   # Subvolume name is the same as the mountpoint
                   "/home" = {
@@ -44,8 +50,6 @@
                     mountpoint = "/nix";
                   };
                 };
-
-                mountpoint = "/partition-root";
               };
             };
           };
