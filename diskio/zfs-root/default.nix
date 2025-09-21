@@ -3,7 +3,7 @@
     disk = {
       vdb = {
         type = "disk";
-        device = "/dev/nvme0n1";
+        device = "/dev/disk/by-id/to-be-filled-during-installation";
         content = {
           type = "gpt";
           partitions = {
@@ -16,7 +16,7 @@
               content = {
                 type = "filesystem";
                 format = "vfat";
-                mountpoint = "/boot";
+                mountpoint = "/boot/efis/to-be-filled-during-installation-part2";
               };
             };
             root = {
