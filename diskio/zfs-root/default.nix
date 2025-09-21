@@ -14,7 +14,7 @@
               content = {
                 type = "filesystem";
                 format = "vfat";
-                mountpoint = "/boot/efis/to-be-filled-during-installation-part2";
+                mountpoint = "/boot";
               };
             };
             root = {
@@ -29,9 +29,6 @@
                   "/rootfs" = {
                     mountOptions = [ "compress=zstd" ];
                     mountpoint = "/";
-                  };
-                  # Sub(sub)volume doesn't need a mountpoint as its parent is mounted
-                  "/boot" = { };
                   };
                   # Subvolume name is the same as the mountpoint
                   "/home" = {
