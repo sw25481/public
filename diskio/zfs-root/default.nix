@@ -7,11 +7,9 @@
         content = {
           type = "gpt";
           partitions = {
-            ESP = {
+            efi = {
               priority = 1;
-              name = "ESP";
-              start = "1M";
-              end = "550M";
+              size = "1G";
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -20,7 +18,7 @@
               };
             };
             root = {
-              size = "100%";
+              end = "-1M";
               content = {
                 type = "btrfs";
                 extraArgs = [ "-f" ]; # Override existing partition
@@ -32,10 +30,8 @@
                     mountOptions = [ "compress=zstd" ];
                     mountpoint = "/";
                   };
-                  # Subvolume name is the same as the mountpoint
-                  "/boot" = {
-                    mountOptions = [ "compress=zstd" ];
-                    mountpoint = "/boot";
+                  # Sub(sub)volume doesn't need a mountpoint as its parent is mounted
+                  "/boot" = { };
                   };
                   # Subvolume name is the same as the mountpoint
                   "/home" = {
@@ -52,6 +48,10 @@
                 };
               };
             };
+            bios = {
+              size = "100%";
+              type = "EF02";
+            };            
           };
         };
       };
